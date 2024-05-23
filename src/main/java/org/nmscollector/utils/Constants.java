@@ -9,7 +9,7 @@ public class Constants
     }
 
 
-    public static final String  DEFAULT_POLL_TIME = "default.poll.time";
+    public static final String POLL_TIME = "poll.time";
 
     public static final String PLUGIN_PROCESS_TIMEOUT =   "plugin.process.timeout";
 
@@ -39,7 +39,11 @@ public class Constants
 
     public static final String PUBLISHER_PORT = "publisher.zmq.port";
 
-    public static final String ZMQ_ADDRESS  = "tcp://localhost:";
+    public static final String HOST_IP = "host.ip";
+
+    public static final String ZMQ_ADDRESS  = "tcp://";
+
+    public static final String COLON = ":";
 
     public static final String RECEIVER_PORT = "receiver.zmq.port";
 

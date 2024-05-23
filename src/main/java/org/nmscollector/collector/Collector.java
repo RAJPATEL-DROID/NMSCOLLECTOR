@@ -4,7 +4,6 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import org.nmscollector.Bootstrap;
 import org.nmscollector.utils.Constants;
 import org.nmscollector.utils.Utils;
@@ -28,13 +27,13 @@ public class Collector extends AbstractVerticle {
 
         ZMQ.Socket poller = zContext.createSocket(SocketType.PULL);
 
-        poller.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.RECEIVER_PORT));
+        poller.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.HOST_IP)  + Constants.COLON +  Utils.config.get(Constants.RECEIVER_PORT));
 
         ZMQ.Socket sender = zContext.createSocket(SocketType.PUSH);
 
-        sender.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.PUBLISHER_PORT));
+        sender.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.HOST_IP)  + Constants.COLON + Utils.config.get(Constants.PUBLISHER_PORT));
 
-        long pollTime = Long.parseLong(Utils.config.get(Constants.DEFAULT_POLL_TIME).toString()) * 1000;
+        long pollTime = Long.parseLong(Utils.config.get(Constants.POLL_TIME).toString()) * 1000;
 
         logger.trace("Default Poll time set to {} ", pollTime);
 
@@ -64,7 +63,6 @@ public class Collector extends AbstractVerticle {
 
                         logger.trace("Polling array : {}", pollingArray);
 
-                        //  tAKE OUT THE WHOLE CONTEXT FROM THE REQUEST;
                         String encodedContext = Base64.getEncoder().encodeToString(pollingArray.toString().getBytes());
 
                         var replyJson = Utils.spawnPluginEngine(encodedContext, pollingArray.size());
@@ -92,15 +90,6 @@ public class Collector extends AbstractVerticle {
                         logger.error(exception.getMessage());
 
                         logger.error(exception.toString());
-                    }
-                }).onComplete(handler ->
-                {
-                    if (handler.succeeded())
-                    {
-
-                    }
-                    else
-                    {
                     }
                 });
             }
