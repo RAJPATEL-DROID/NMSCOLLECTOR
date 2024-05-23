@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for Server Logs -->
+    <appender name="bootstrap" class="ch.qos.logback.core.FileAppender">
+        <file>./Logs/Bootstrap.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="utils" class="ch.qos.logback.core.FileAppender">
+        <file>./Logs/Utils.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="Collector" class="ch.qos.logback.core.FileAppender">
+        <file>./Logs/Collector.log</file>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger -->
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <!-- Logger for Server -->
+
+    <logger name="org.nmscollector.collector.Collector" level="trace" additivity="false">
+        <appender-ref ref="Collector"/>
+    </logger>
+
+    <logger name="org.nmscollector.utils.Utils" level="trace" additivity="false">
+        <appender-ref ref="utils"/>
+    </logger>
+
+    <logger name="org.nmscollector.Bootstrap" level="trace" additivity="false">
+        <appender-ref ref="bootstrap"/>
+    </logger>
+
+
+</configuration>
