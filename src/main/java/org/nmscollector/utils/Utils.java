@@ -136,7 +136,7 @@ public class Utils {
         {
             var currentDir = System.getProperty(Constants.USER_DIRECTORY);
 
-            var processBuilder = new ProcessBuilder(currentDir + Constants.PLUGIN_APPLICATION_PATH, encodedString);
+            var processBuilder = new ProcessBuilder(Utils.config.get(Constants.PLUGIN_APPLICATION_PATH).toString(), encodedString);
 
             processBuilder.redirectErrorStream(true);
 

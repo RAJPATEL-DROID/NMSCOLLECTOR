@@ -33,7 +33,7 @@ public class Constants
 
     public static final String ERROR_MESSAGE = "error.message";
 
-    public static final String PLUGIN_APPLICATION_PATH = "/PluginEngine/bootstrap";
+    public static final String PLUGIN_APPLICATION_PATH = "plugin.engine.path";
 
     public static final String UNIQUE_SEPARATOR  = "~@@~";
 
@@ -41,7 +41,7 @@ public class Constants
 
     public static final String HOST_IP = "host.ip";
 
-    public static final String ZMQ_ADDRESS  = "tcp://";
+    public static final String HOST_ZMQ_ADDRESS  = "host.zmq.address";
 
     public static final String COLON = ":";
 

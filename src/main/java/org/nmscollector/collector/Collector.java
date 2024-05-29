@@ -27,11 +27,11 @@ public class Collector extends AbstractVerticle {
 
         ZMQ.Socket poller = zContext.createSocket(SocketType.PULL);
 
-        poller.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.HOST_IP)  + Constants.COLON +  Utils.config.get(Constants.RECEIVER_PORT));
+        poller.connect(Utils.config.get(Constants.HOST_ZMQ_ADDRESS).toString()  +  Utils.config.get(Constants.RECEIVER_PORT).toString());
 
         ZMQ.Socket sender = zContext.createSocket(SocketType.PUSH);
 
-        sender.connect(Constants.ZMQ_ADDRESS + Utils.config.get(Constants.HOST_IP)  + Constants.COLON + Utils.config.get(Constants.PUBLISHER_PORT));
+        sender.connect(Utils.config.get(Constants.HOST_ZMQ_ADDRESS).toString()  + Utils.config.get(Constants.PUBLISHER_PORT).toString());
 
         long pollTime = Long.parseLong(Utils.config.get(Constants.POLL_TIME).toString()) * 1000;
 
